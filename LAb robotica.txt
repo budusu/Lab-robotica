@@ -1,0 +1,25 @@
+int sensorValue = 0; //se crean las variables y se definen como   
+int outputValue = 0; //enteras, con valor =0
+
+void setup() // Se definen las funciones de los pines
+{
+  pinMode(A0, INPUT);  //A0 sera considerado como entrada
+  pinMode(9, OUTPUT); // pin 9 será considerado como salida 
+  Serial.begin(9600);  
+}
+void loop()  // Funcion bucle, corresponde a la funcion que se ejecuta 
+{            //mientras arduino esta en funcionamiento 
+  sensorValue = analogRead(A0);// se asigna el valor leido por A0 a variable 
+                                //de entrada
+  outputValue = map(sensorValue, 0, 1023, 0, 255); // se mapea el valor 
+//Anterior siendo exp´resado con un valor (Analogo) entre 0 y 1023
+//para luego transformarlo en señal digital, variando entre 0 y 255 para 8 bits
+  analogWrite(9, outputValue);// Se asigna como variable digital cuya salida será 
+                             // el pin 9
+  //a continuacion se muestran los valores que adquirieron las variables 
+  Serial.print("sensor = "); 
+  Serial.print(sensorValue);
+  Serial.print("\t output = ");
+  Serial.println(outputValue);
+  // finalmente espera 2 milisegundos y el programa se reinicia 
+  delay(2); 
